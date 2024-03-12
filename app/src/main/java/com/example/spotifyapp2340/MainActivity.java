@@ -1,5 +1,6 @@
 package com.example.spotifyapp2340;
 
+// comment
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
