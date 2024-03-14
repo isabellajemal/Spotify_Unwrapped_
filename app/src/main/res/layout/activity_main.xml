@@ -84,7 +84,53 @@
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:text="Get User Profile" />
+
+            <Button
+                android:id="@+id/playlists_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="Get User Playlists" />
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/responsePlaylists_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:textSize="10sp"
+            tools:text="Line 1\nLine 2\nLine 3" />
+
+        <Button
+            android:id="@+id/topArtists_btn"
+            android:layout_width="378dp"
+            android:layout_height="wrap_content"
+            android:text="Get User Top Artists"
+            app:layout_constraintTop_toBottomOf="@id/responsePlaylists_text_view" />
+
+        <TextView
+            android:id="@+id/responseTopArtists_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:textSize="10sp"
+            tools:text="Line 1\nLine 2\nLine 3" />
+
+        <Button
+            android:id="@+id/topTracks_btn"
+            android:layout_width="378dp"
+            android:layout_height="wrap_content"
+            android:text="Get User Top Tracks"
+            app:layout_constraintTop_toBottomOf="@id/responsePlaylists_text_view" />
+
+        <TextView
+            android:id="@+id/responseTopTracks_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:textSize="10sp"
+            tools:text="Line 1\nLine 2\nLine 3" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
