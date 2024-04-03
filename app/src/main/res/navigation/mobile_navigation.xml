@@ -11,6 +11,15 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
+<!--
+    // added new activity for token
+-->
+    <activity
+        android:id="@+id/navigation_token"
+        android:name="com.example.spotifyapp2340.TokenActivity"
+        android:label="Token"
+        tools:layout="@layout/activity_token" />
+
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.spotifyapp2340.ui.dashboard.DashboardFragment"
@@ -19,7 +28,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.spotifyapp2340.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:name="com.example.spotifyapp2340.ui.notifications.TopArtistsFragment"
+        android:label="Spotify Unwrapped"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
