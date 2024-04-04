@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.spotifyapp2340.ui.notifications.TopArtistsFragment"
+        android:name="com.example.spotifyapp2340.ui.notifications.UnwrappedFragment"
         android:label="Spotify Unwrapped"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

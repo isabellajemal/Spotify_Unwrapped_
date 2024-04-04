@@ -1,5 +1,6 @@
 package com.example.spotifyapp2340.ui.notifications;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,30 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.spotifyapp2340.ArtistsAdapter;
-import com.example.spotifyapp2340.databinding.FragmentNotificationsBinding;
-import com.spotify.sdk.android.auth.AuthorizationClient;
-import com.spotify.sdk.android.auth.AuthorizationRequest;
-import com.spotify.sdk.android.auth.AuthorizationResponse;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import com.example.spotifyapp2340.ArtistsAdapter;
+import com.example.spotifyapp2340.TokenActivity;
 import com.example.spotifyapp2340.databinding.FragmentNotificationsBinding;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
@@ -55,7 +33,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class TopArtistsFragment extends Fragment {
+public class UnwrappedFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
     private ArtistsAdapter adapter;
@@ -73,10 +51,26 @@ public class TopArtistsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        spotifyAuthLauncher = registerForActivityResult(
+
+      spotifyAuthLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 this::handleAuthResult
         );
+    }
+    private ActivityResultLauncher<Intent> tokenActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    // This is where you get the token returned from TokenActivity
+                    String token = result.getData().getStringExtra("token");
+                    if (token != null) {
+                        // Handle the token as needed, e.g., make API calls or update UI
+                        handleToken(token);
+                    }
+                }
+            });
+
+    private void handleToken(String token) {
     }
 
     @Override
@@ -87,7 +81,7 @@ public class TopArtistsFragment extends Fragment {
         binding.recyclerViewArtists.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Automatically initiate token retrieval on fragment view creation
-        getToken();
+        startTokenActivity();
 
         // Initialize click listeners for buttons
         binding.buttonThisWeek.setOnClickListener(v -> fetchData("short_term"));
@@ -157,6 +151,11 @@ public class TopArtistsFragment extends Fragment {
             }
         });
     }
+    private void startTokenActivity() {
+        Intent intent = new Intent(getActivity(), TokenActivity.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public void onDestroyView() {

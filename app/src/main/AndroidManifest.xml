@@ -34,7 +34,7 @@
         </activity>
 
         <activity
-            android:name=".UserTopArtists"
+            android:name=".UnwrappedActivity"
             android:exported="true"
             android:label="@string/title_activity_user_top_artists">
             <intent-filter>

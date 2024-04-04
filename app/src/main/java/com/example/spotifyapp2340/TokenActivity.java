@@ -252,11 +252,13 @@ public class TokenActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onDestroy() {
         cancelCall();
         super.onDestroy();
     }
+
 
 
     /**
@@ -380,6 +382,18 @@ public class TokenActivity extends AppCompatActivity {
             }
 
         });
+    }
+    private void finishTokenProcess() {
+        // Create an intent to navigate back to MainActivity
+        Intent intent = new Intent(TokenActivity.this, UnwrappedActivity.class);
+        // If you need to pass back data, put extra data here
+        // intent.putExtra("KEY", "value");
+
+        // Start MainActivity
+        startActivity(intent);
+
+        // Finish TokenActivity so the user returns to MainActivity
+        finish();
     }
 
 }
