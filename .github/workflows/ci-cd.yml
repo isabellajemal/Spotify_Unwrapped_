@@ -19,7 +19,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '11' # Change this to match your Java version
+          java-version: '17' # Change this to match your Java version
 
       - name: Build with Maven
         run: mvn -B clean package
