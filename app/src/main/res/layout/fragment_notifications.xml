@@ -6,6 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".ui.notifications.NotificationsFragment">
 
+<<<<<<< Updated upstream
+=======
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal">
+
+      <!--  <Button
+            android:id="@+id/unwrapYourMusicButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Unwrap Your Music" />
+
+        <TextView
+            android:id="@+id/tokenTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Token will appear here"
+            android:visibility="invisible" />
+-->
+        <!-- Heading for the Top Artists Page -->
+        <TextView
+            android:id="@+id/textViewYourTopArtists"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Top Artists"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- RecyclerView for Top Artists -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewArtists"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical" />
+
+        <!-- Container for Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center">
+
+            <!-- This Week Button -->
+            <Button
+                android:id="@+id/buttonThisWeek"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@null"
+                android:background="@drawable/button_rounded_green"
+                android:text="This Week"
+                android:textColor="#000000" />
+
+            <!-- Last 6 Months Button -->
+            <Button
+                android:id="@+id/buttonLastSixMonths"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last 6 Months"
+                android:background="@drawable/button_rounded_green"
+                android:textColor="#000000"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+
+            <!-- This Year Button -->
+            <Button
+                android:id="@+id/buttonThisYear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="This Year"
+                android:background="@drawable/button_rounded_green"
+                android:textColor="#000000"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Heading for the Top Tracks Page -->
+>>>>>>> Stashed changes
     <TextView
         android:id="@+id/text_notifications"
         android:layout_width="match_parent"

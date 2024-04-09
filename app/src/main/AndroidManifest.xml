@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< Updated upstream
     xmlns:tools="http://schemas.android.com/tools">
+=======
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingLeanbackLauncher">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:enableOnBackInvokedCallback="true"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+>>>>>>> Stashed changes
 
     <application
         android:allowBackup="true"
@@ -26,6 +41,40 @@
 
             </intent-filter>
         </activity>
+<<<<<<< Updated upstream
+=======
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".UnwrappedActivity"
+            android:exported="true"
+            android:label="@string/title_activity_user_top_artists">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="auth" android:scheme="com.example.spotifyapp2340" />
+                <data android:scheme="com.example.spotifyapp2340" android:host="auth" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".TokenActivity"
+            android:exported="true"
+            android:label="@string/title_activity_token_activity">
+            <!-- If needed, add intent filters specific to this activity -->
+        </activity>
+
+        <!-- Add more activities and other components as needed -->
+
+>>>>>>> Stashed changes
     </application>
 
 </manifest>

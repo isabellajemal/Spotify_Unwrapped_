@@ -1,6 +1,11 @@
 package com.example.spotifyapp2340;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+
+import android.app.Activity;
 import android.content.Intent;
+import android.media.session.MediaSession;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.spotifyapp2340.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
@@ -18,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -25,8 +40,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
 
+import android.os.Bundle;
+
+public class TokenActivity extends AppCompatActivity {
     public static final String CLIENT_ID = "bba1543448324cecabcc2a9328c94179";
     public static final String REDIRECT_URI = "com.example.spotifyapp2340://auth";
 
@@ -45,28 +62,37 @@ public class MainActivity extends AppCompatActivity {
     private static final String SPOTIFY_TRACKS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks";
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_token);
 
         // Initialize the views
         tokenTextView = (TextView) findViewById(R.id.token_text_view);
         codeTextView = (TextView) findViewById(R.id.code_text_view);
         profileTextView = (TextView) findViewById(R.id.response_text_view);
-        playlistsTextView = (TextView) findViewById(R.id.responsePlaylists_text_view);
-        topArtistsTextView = (TextView) findViewById(R.id.responseTopArtists_text_view);
-        topTracksTextView = (TextView) findViewById(R.id.responseTopTracks_text_view);
+       // playlistsTextView = (TextView) findViewById(R.id.responsePlaylists_text_view);
+        //topArtistsTextView = (TextView) findViewById(R.id.responseTopArtists_text_view);
+        //topTracksTextView = (TextView) findViewById(R.id.responseTopTracks_text_view);
 
+
+       /* // Setup RecyclerView and Adapter
+        RecyclerView recyclerViewArtists = findViewById(R.id.recyclerViewArtists);
+        adapter = new ArtistsAdapter(); // Initialize the adapter
+        recyclerViewArtists.setAdapter(adapter);
+        recyclerViewArtists.setLayoutManager(new LinearLayoutManager(this));*/
 
         // Initialize the buttons
         Button tokenBtn = (Button) findViewById(R.id.token_btn);
         Button codeBtn = (Button) findViewById(R.id.code_btn);
-        Button profileBtn = (Button) findViewById(R.id.profile_btn);
-        Button playlistsBtn = (Button) findViewById(R.id.playlists_btn);
-        Button topArtistsBtn = (Button) findViewById(R.id.topArtists_btn);
-        Button topTracksBtn = (Button) findViewById(R.id.topTracks_btn);
+       // Button profileBtn = (Button) findViewById(R.id.profile_btn);
+        //Button playlistsBtn = (Button) findViewById(R.id.playlists_btn);
+       // Button topArtistsBtn = (Button) findViewById(R.id.topArtists_btn);
+       // Button topTracksBtn = (Button) findViewById(R.id.topTracks_btn);
+
+       /* // Now you can call the method
+        String userId = "someUserId"; // Get the userId appropriately
+        adapter.loadUserTopArtists(userId);*/
 
         // Set the click listeners for the buttons
 
@@ -78,21 +104,21 @@ public class MainActivity extends AppCompatActivity {
             getCode();
         });
 
-        profileBtn.setOnClickListener((v) -> {
+        /*profileBtn.setOnClickListener((v) -> {
             onGetUserProfileClicked();
-        });
+        });*/
         // find a way to get user playlists
-        playlistsBtn.setOnClickListener((v) -> {
-            onGetUserPlaylistsClicked();
-        });
+        /*playlistsBtn.setOnClickListener((v) -> {
+            onGetUserPlaylistsClicked();*/
+        /*});*/
         // find a way to get user's top artists
-        topArtistsBtn.setOnClickListener((v) -> {
+       /* topArtistsBtn.setOnClickListener((v) -> {
             onGetTopArtistsClicked();
-        });
-        //find a way to get user's top tracks
+        });*/
+        /*//find a way to get user's top tracks
         topTracksBtn.setOnClickListener((v) -> {
             onGetTopTracksClicked();
-        });
+        });*/
 
     }
 
@@ -104,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void getToken() {
         final AuthorizationRequest request = getAuthenticationRequest(AuthorizationResponse.Type.TOKEN);
-        AuthorizationClient.openLoginActivity(MainActivity.this, AUTH_TOKEN_REQUEST_CODE, request);
+        AuthorizationClient.openLoginActivity(TokenActivity.this, AUTH_TOKEN_REQUEST_CODE, request);
     }
 
     /**
@@ -115,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void getCode() {
         final AuthorizationRequest request = getAuthenticationRequest(AuthorizationResponse.Type.CODE);
-        AuthorizationClient.openLoginActivity(MainActivity.this, AUTH_CODE_REQUEST_CODE, request);
+        AuthorizationClient.openLoginActivity(TokenActivity.this, AUTH_CODE_REQUEST_CODE, request);
     }
 
 
@@ -164,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call call, IOException e) {
                 Log.d("HTTP", "Failed to fetch data: " + e);
                 runOnUiThread(() -> {
-                    Toast.makeText(MainActivity.this, "Failed to fetch data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TokenActivity.this, "Failed to fetch data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
                 });
             }
 
@@ -177,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse data: " + e);
                     runOnUiThread(() -> {
-                        Toast.makeText(MainActivity.this, "Failed to parse data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TokenActivity.this, "Failed to parse data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
                     });
                 }
             }
@@ -226,11 +252,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onDestroy() {
         cancelCall();
         super.onDestroy();
     }
+
+
 
     /**
      * Get user playlists info
@@ -253,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call call, IOException e) {
                 Log.d("HTTP", "Failed to fetch data: " + e);
                 runOnUiThread(() -> {
-                    Toast.makeText(MainActivity.this, "Failed to fetch data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TokenActivity.this, "Failed to fetch data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
                 });
             }
 
@@ -265,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse data: " + e);
                     runOnUiThread(() -> {
-                        Toast.makeText(MainActivity.this, "Failed to parse data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TokenActivity.this, "Failed to parse data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
                     });
                 }
             }
@@ -294,7 +323,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call call, IOException e) {
                 Log.d("HTTP", "Failed to fetch data: " + e);
                 runOnUiThread(() -> {
-                    Toast.makeText(MainActivity.this, "Failed to fetch data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TokenActivity.this, "Failed to fetch data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
                 });
             }
 
@@ -306,14 +335,16 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse data: " + e);
                     runOnUiThread(() -> {
-                        Toast.makeText(MainActivity.this, "Failed to parse data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TokenActivity.this, "Failed to parse data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
                     });
                 }
             }
 
         });
     }
-    /** Get user's top tracks
+
+    /**
+     * Get user's top tracks
      * This method will get user's top tracks using the token
      */
     public void onGetTopTracksClicked() {
@@ -333,9 +364,10 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call call, IOException e) {
                 Log.d("HTTP", "Failed to fetch data: " + e);
                 runOnUiThread(() -> {
-                    Toast.makeText(MainActivity.this, "Failed to fetch data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TokenActivity.this, "Failed to fetch data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
                 });
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try {
@@ -344,13 +376,11 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse data: " + e);
                     runOnUiThread(() -> {
-                        Toast.makeText(MainActivity.this, "Failed to parse data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TokenActivity.this, "Failed to parse data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
                     });
                 }
             }
 
         });
     }
-}
-
-
+    }
