@@ -2,24 +2,26 @@ package com.example.spotifyapp2340.ui.home;
 
 public class QuestionAnswer {
 
+
+
     public static String question[] ={
-            "Which company owns the android?",
-            "Which one is not the programming language?",
-            "Where you are watching this video?",
-            "Which company owns the Apple?"
+            "Who is your top artist?",
+            "Who is your fifth most listened to artist?",
+            "What is you top track?",
+            "What is your third most played track?"
     };
 
     public static String choices[][] = {
-            {"Google","Apple","Nokia","Samsung"},
-            {"Java","Kotlin","Notepad","Python"},
-            {"Facebook","Whatsapp","Instagram","Youtube"},
-            {"Google","Apple","Nokia","Samsung"}
+            {"Drake","Ariana Grande","Taylor Swift","Doja Cat"},
+            {"Drake","Ariana Grande","Taylor Swift","Doja Cat"},
+            {"Daylight","eternal sunshine","Red Wine Supernova","Hype"},
+            {"Daylight","eternal sunshine","Red Wine Supernova","Hype"}
     };
 
     public static String correctAnswers[] = {
-            "Google",
-            "Notepad",
-            "Youtube",
-            "Apple"
+            "Drake",
+            "Doja Cat",
+            "eternal sunshine",
+            "Red Wine Supernova"
     };
 }

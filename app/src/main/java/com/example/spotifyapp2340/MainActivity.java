@@ -1,9 +1,12 @@
 package com.example.spotifyapp2340;
 
+
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +27,7 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+//import com.example.spotifyapp2340.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private String mAccessToken, mAccessCode;
     private Call mCall;
     private Button tokenBtn, codeBtn, profileBtn, playlists_btn, topTracks_btn;
+
 
     private TextView tokenTextView, codeTextView, profileTextView, playlistsTextView, topArtistsTextView, topTracksTextView;
 
@@ -67,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
         Button playlistsBtn = (Button) findViewById(R.id.playlists_btn);
         Button topArtistsBtn = (Button) findViewById(R.id.topArtists_btn);
         Button topTracksBtn = (Button) findViewById(R.id.topTracks_btn);
+        Button gameB = (Button)findViewById(R.id.game_btn);
+        Button gameFill = (Button)findViewById(R.id.game2_btn);
 
         // Set the click listeners for the buttons
 
@@ -93,6 +100,27 @@ public class MainActivity extends AppCompatActivity {
         topTracksBtn.setOnClickListener((v) -> {
             onGetTopTracksClicked();
         });
+
+        //button to go to game
+        gameB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GameActivity2.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        gameFill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Fill_in_blank.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
     }
 
@@ -172,7 +200,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try {
-                    final JSONObject jsonObject = new JSONObject(response.body().string());
+                    String responseBody = response.body().string();
+                    Log.i("response: ", responseBody);
+                    final JSONObject jsonObject = new JSONObject(responseBody);
                     setTextAsync(jsonObject.toString(3), profileTextView);
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse data: " + e);

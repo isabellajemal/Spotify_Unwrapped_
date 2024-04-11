@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#191414"
+    android:padding="24dp"
+    tools:context=".Fill_in_blank">
+
+    <TextView
+        android:id="@+id/total_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Questions"
+        android:textSize="24sp"
+        android:textColor="#1DB954"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="The capital of France is _____."
+        android:textSize="28sp"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:layout_below="@id/total_question"
+        android:layout_marginTop="40dp"/>
+
+    <EditText
+        android:id="@+id/user_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type your answer here"
+        android:textSize="18sp"
+        android:layout_below="@id/question"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#1DB954"
+        android:textColor="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/submit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:background="#1DB954"
+        android:layout_below="@id/user_answer"
+        android:layout_marginTop="40dp"/>
+
+    <Button
+        android:id="@+id/back_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:background="#1DB954"
+        android:layout_below="@id/submit_btn"
+        android:layout_marginTop="20dp"/>
+
+</RelativeLayout>

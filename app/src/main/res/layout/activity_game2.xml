@@ -1,95 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_200"
+    android:background="#191414"
     android:padding="24dp"
     tools:context=".GameActivity2">
 
     <TextView
+        android:id="@+id/total_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/total_question"
-        android:text="Total Questions "
-        android:layout_centerHorizontal="true"
-        android:textSize="20dp"/>
-
+        android:text="Total Questions"
+        android:textSize="20sp"
+        android:textColor="#1DB954"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
+        android:id="@+id/question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/question"
-        android:textStyle="bold"
         android:text="This will be the question"
-        android:textColor="@color/white"
-        android:textSize="24dp"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
         android:textAlignment="center"
-        android:layout_margin="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
         android:layout_above="@id/choices_layout"/>
 
-
     <LinearLayout
+        android:id="@+id/choices_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/choices_layout"
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/ans_A"
-            android:layout_margin="5dp"
-            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Ans A"
-            android:textColor="@color/black"/>
+            android:textColor="#FFFFFF"
+            android:background="#1DB954"
+            android:layout_margin="5dp"/>
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/ans_B"
-            android:layout_margin="5dp"
-            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Ans B"
-            android:textColor="@color/black"/>
+            android:textColor="#FFFFFF"
+            android:background="#1DB954"
+            android:layout_margin="5dp"/>
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/ans_C"
-            android:layout_margin="5dp"
-            android:backgroundTint="@color/white"
-            android:text="Ans C"
-            android:textColor="@color/black"/>
-        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Ans C"
+            android:textColor="#FFFFFF"
+            android:background="#1DB954"
+            android:layout_margin="5dp"/>
+
+        <Button
             android:id="@+id/ans_D"
-            android:layout_margin="5dp"
-            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Ans D"
-            android:textColor="@color/black"/>
+            android:textColor="#FFFFFF"
+            android:background="#1DB954"
+            android:layout_margin="5dp"/>
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/submit_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/submit_btn"
         android:text="Submit"
+        android:textColor="#FFFFFF"
+        android:background="#1DB954"
         android:layout_below="@id/choices_layout"
         android:layout_marginTop="40dp"/>
 
     <Button
+        android:id="@+id/back_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/back_btn"
         android:text="Back"
+        android:textColor="#FFFFFF"
+        android:background="#1DB954"
         android:layout_below="@id/submit_btn"
         android:layout_marginTop="20dp"/>
-
-
 
 </RelativeLayout>

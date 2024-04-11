@@ -131,6 +131,22 @@
             android:textSize="10sp"
             tools:text="Line 1\nLine 2\nLine 3" />
 
+        <Button
+            android:id="@+id/game_btn"
+            android:layout_width="378dp"
+            android:layout_height="wrap_content"
+            android:text="Quiz Game"
+            app:layout_constraintTop_toBottomOf="@id/topTracks_btn" />
+
+        <Button
+            android:id="@+id/game2_btn"
+            android:layout_width="378dp"
+            android:layout_height="wrap_content"
+            android:text="Fill in the Blank Game"
+            app:layout_constraintTop_toBottomOf="@id/game_btn" />
+
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
